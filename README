@@ -1,0 +1,44 @@
+-- this is fairly old school work yo --
+
+so, after i did that vurs thing (ie: http://github.com/lzimm/vurs),
+i had this cluster framework i started working on that i figured even though
+was full of funny stuff all over the place (cuz it did really silly things, like
+rely on ip broadcasts to maintain heartbeats of all the nodes), and didn't do
+anything in terms of caching or anything like that, it had enough put together
+that i figured "hey, even though things like that are a pain in the ass,
+(because of all the fun issues that creep up in invalidating things properly
+in the middle of data races happening all over the place, and balancing between
+stampeding and serving what could be dangerously stale data), this stuff is
+layered enough that i can probably get to it pretty easy if it ever becomes
+that painful of an issue" (and i'm talking about lazy caching, where it just
+does it all magically so entity reads stay nice and snappy, regardless of
+whether that's even a good idea in the first place, that's for the scientists
+to figure out). besides, even though not much of it was very clever, it had
+what, at the time, felt like a fairly nice serialization system, so that nodes
+could communicate pretty easily (in a consistently hashful way), had a "nice"
+modular entity system that i could use to swap out storage backends for different
+types of objects between mysql, cassandra, hbase, binaries, and whatever else
+i wanted to "nicely wrap" in the future, and it even had this little multi-layer
+cluster ring system, where, since every node was homogeneous, i could set them 
+up to participate in certain subsets of "service layers", with independent capacity
+requirements, and by monitoring usage and all that jazz, i could automatically
+balance between them, even though leaders on said "layers" were "elected" in a way
+that i wouldn't exactly back up in a knife fight.
+
+what a magical pipedream.
+
+plus it did all this stuff to do dependency resolution between internal services
+(in what can actually be best described as "keep running against the wall until
+you break through it"), and, since i basically ripped it out of that vurs thing,
+it had all this strange NLP stuff (which i only pretended to understand) 
+baked in to boot (for better or worse, whether i wanted it or not).
+
+but yeah, as you can probably tell from my tone, i don't touch this thing anymore.
+
+anyways, standard disclaimer:
+
+there's a bunch of extra junk in here you probably don't need to run it,
+while on the other hand, its probably missing some stuff you do
+(as well as any explanation of how all this junk works,
+license information that i probably stripped from a bunch of files
+and any sort of sanity). so funny.

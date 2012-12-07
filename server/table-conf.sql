@@ -1,0 +1,7 @@
+
+
+
+CREATE TABLE `undefineduser` (
+`id` INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
